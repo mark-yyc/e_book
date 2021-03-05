@@ -1,0 +1,16 @@
+<!--pages/book/book.wxml-->
+<view>
+  <view>
+    <van-image width="18rem" height="18rem" fit="contain" src="{{book.image}}" /> 
+    <view style="margin-left:2rem">
+    <text>{{book.name}}\n</text>
+    <text>库存：{{book.inventory}}\n</text>
+    <text style="color:red">¥ {{book.price}}\n</text>
+    <text>简介：\n{{book.description}}\n\n\n\n</text>
+    </view>
+    <van-goods-action fixed = "true">
+      <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon"/>
+      <van-goods-action-button text="加入购物车" type="warning"bind:click="onClickButton"/>
+    </van-goods-action>
+  </view>
+</view>

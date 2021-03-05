@@ -1,0 +1,35 @@
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL,
+	`username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `user_type` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `nickname` varchar(255) NOT NULL,
+  `tel` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) 
+
+DROP TABLE IF EXISTS `book`;
+CREATE TABLE `book` (
+  `id` int(11) NOT NULL,
+  `isbn` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `author` varchar(255) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `description` varchar(2000) DEFAULT NULL,
+  `inventory` int(11) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
+	`order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+	`book_list` varchar(255) NOT NULL,
+  PRIMARY KEY (`order_id`)
+) 
+
