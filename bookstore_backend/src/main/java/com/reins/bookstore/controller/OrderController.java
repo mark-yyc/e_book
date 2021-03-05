@@ -3,8 +3,6 @@ package com.reins.bookstore.controller;
 import com.reins.bookstore.dto.ShoppingCartSession;
 import com.reins.bookstore.entity.BookInfoInCart;
 import com.reins.bookstore.entity.Order;
-import com.reins.bookstore.entity.OrderItem;
-import com.reins.bookstore.entity.ShoppingCart;
 import com.reins.bookstore.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +22,15 @@ public class OrderController {
     WebApplicationContext applicationContext;
 
     @RequestMapping("/addOrder")
-    public boolean addOrder(@RequestParam("userId")int userId, @RequestParam("orderDate")Date orderDate){
-        ShoppingCartSession shoppingCartSession=applicationContext.getBean(ShoppingCartSession.class);
+    public boolean addOrder(@RequestParam("orderDate") Date orderDate) {
+        ShoppingCartSession shoppingCartSession = applicationContext.getBean(ShoppingCartSession.class);
+        if (shoppingCartSession.getShoppingCartSize() == 0) {
+            return false;
+        }
 //        System.out.println(orderDate);
 //        List<ShoppingCart> cartContent=orderService.getShoppingCart(userId);
-//        orderService.addOrder(userId,orderDate,);
+        orderService.addOrder(orderDate, shoppingCartSession);
+        shoppingCartSession.clear();
         return true;
     }
 

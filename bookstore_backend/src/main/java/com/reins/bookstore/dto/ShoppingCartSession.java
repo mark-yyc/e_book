@@ -1,6 +1,5 @@
 package com.reins.bookstore.dto;
 
-import com.reins.bookstore.entity.ShoppingCart;
 import lombok.Data;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -15,19 +14,32 @@ import java.util.List;
 public class ShoppingCartSession implements Serializable {
     private int userId;
     private List<CartItem> shoppingCartList;
+
     public void addCartItem(int bookId){
         if(shoppingCartList==null){
             shoppingCartList=new ArrayList<>();
         }
         for(CartItem cartItem : shoppingCartList){
-            if(cartItem.getBookId()==bookId){
-                cartItem.setAmount(cartItem.getAmount()+1);
+            if (cartItem.getBookId() == bookId) {
+                cartItem.setAmount(cartItem.getAmount() + 1);
                 return;
             }
         }
-        CartItem cartItem=new CartItem();
+        CartItem cartItem = new CartItem();
         cartItem.setBookId(bookId);
         cartItem.setAmount(1);
         shoppingCartList.add(cartItem);
+    }
+
+    public int getShoppingCartSize() {
+        if (shoppingCartList != null) {
+            return shoppingCartList.size();
+        } else {
+            return 0;
+        }
+    }
+
+    public void clear() {
+        shoppingCartList.clear();
     }
 }

@@ -3,6 +3,8 @@ package com.reins.bookstore.serviceImpl;
 import com.reins.bookstore.dao.BookDao;
 import com.reins.bookstore.dao.OrderDao;
 import com.reins.bookstore.dao.ShoppingCartDao;
+import com.reins.bookstore.dto.CartItem;
+import com.reins.bookstore.dto.ShoppingCartSession;
 import com.reins.bookstore.entity.*;
 import com.reins.bookstore.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,22 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private BookDao bookDao;
 
+//    @Override
+//    public void addOrder(int userId , Date orderDate,List<ShoppingCart>bookList){
+//        orderDao.addOrder(userId,orderDate,bookList);
+//        shoppingCartDao.clearShoppingCart(userId);
+//        for (ShoppingCart shoppingCart : bookList) {
+//            bookDao.decreaseInventory(shoppingCart.getBookId(), shoppingCart.getAmount());
+//        }
+//    }
+
+
     @Override
-    public void addOrder(int userId , Date orderDate,List<ShoppingCart>bookList){
-        orderDao.addOrder(userId,orderDate,bookList);
-        shoppingCartDao.clearShoppingCart(userId);
-        for (ShoppingCart shoppingCart : bookList) {
-            bookDao.decreaseInventory(shoppingCart.getBookId(), shoppingCart.getAmount());
+    public void addOrder(Date orderDate, ShoppingCartSession shoppingCartSession) {
+        orderDao.addOrder(orderDate, shoppingCartSession);
+        List<CartItem> cartItemList = shoppingCartSession.getShoppingCartList();
+        for (CartItem cartItem : cartItemList) {
+            bookDao.decreaseInventory(cartItem.getBookId(), cartItem.getAmount());
         }
     }
 
