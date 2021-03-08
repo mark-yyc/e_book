@@ -1,0 +1,75 @@
+#components-layout-demo-fixed-sider .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+}
+
+.site-layout .site-layout-background {
+    background: white;
+}
+
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 160px;
+    width: 500px;
+    line-height: 160px;
+    background: #364d79;
+    overflow: hidden;
+}
+
+.ant-carousel .slick-slide h3 {
+    color: #fff;
+}
+
+.sider {
+    background: #8ec0e4 !important;
+}
+
+.ant-menu-item-selected {
+    background-color: #d4dfe6 !important;
+    /*select color background*/
+    color: white !important;
+    /*color of the word*/
+}
+
+.ant-menu-item::after {
+    border-right: 3px solid white !important;
+    /*select color after item*/
+}
+
+.ant-menu {
+    color: white !important;
+    background: #8ec0e4 !important;
+}
+
+.ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left {
+    border-right: 1px solid #8ec0e4 !important;
+}
+
+.ant-btn-primary {
+    background-color: #8ec0e4 !important;
+    border-color: #d4dfe6 !important;
+}
+
+.searchbar {
+    width: 500px;
+    margin-left: 20px;
+}
+
+.bookList {
+    margin: 20px !important;
+}
+
+#submit_order {
+    float: right;
+    height: 60px;
+    width: 100px;
+}
+
+.nav-text {
+    color: white !important;
+}
+
+.ant-list-something-after-last-item {
+    margin: 20px !important;
+}
