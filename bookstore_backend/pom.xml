@@ -11,7 +11,8 @@
 
     <modules>
         <module>bookstore_main</module>
-        <module>rmi_server</module>
+        <module>rmi_client</module>
+        <module>common</module>
     </modules>
 
     <properties>
