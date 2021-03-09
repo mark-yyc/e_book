@@ -1,8 +1,8 @@
 package com.mark.daoimpl;
 
 import com.mark.dao.OrderDao;
-import com.mark.dto.CartItem;
-import com.mark.dto.ShoppingCartSession;
+import com.mark.dto.ShoppingCartItem;
+import com.mark.dto.ShoppingCart;
 import com.mark.entity.Order;
 import com.mark.entity.OrderItem;
 import com.mark.repository.OrderItemRepository;
@@ -40,18 +40,18 @@ public class OrderDaoImpl implements OrderDao {
 //    }
 
     @Override
-    public void addOrder(Date orderDate, ShoppingCartSession shoppingCartSession) {
+    public void addOrder(Date orderDate, ShoppingCart shoppingCart) {
         Order oneOrder = new Order();
-        oneOrder.setUserId(shoppingCartSession.getUserId());
+        oneOrder.setUserId(shoppingCart.getUserId());
         oneOrder.setOrderDate(orderDate);
         Order tmp = orderRepository.save(oneOrder);
         int OrderId = tmp.getOrderId();
-        List<CartItem> cartItemList = shoppingCartSession.getShoppingCartList();
-        for (int i = 0; i < cartItemList.size(); i++) {
+        List<ShoppingCartItem> shoppingCartItemList = shoppingCart.getShoppingCartList();
+        for (ShoppingCartItem shoppingCartItem : shoppingCartItemList) {
             OrderItem oneOrderItem = new OrderItem();
             oneOrderItem.setOrderId(OrderId);
-            oneOrderItem.setBookId(cartItemList.get(i).getBookId());
-            oneOrderItem.setAmount(cartItemList.get(i).getAmount());
+            oneOrderItem.setBookId(shoppingCartItem.getBookId());
+            oneOrderItem.setAmount(shoppingCartItem.getAmount());
             orderItemRepository.save(oneOrderItem);
         }
     }

@@ -1,6 +1,6 @@
 package com.mark.controller;
 
-import com.mark.dto.ShoppingCartSession;
+import com.mark.dto.ShoppingCart;
 import com.mark.entity.BookInfoInCart;
 import com.mark.entity.Order;
 import com.mark.service.OrderService;
@@ -23,33 +23,26 @@ public class OrderController {
 
     @RequestMapping("/addOrder")
     public boolean addOrder(@RequestParam("orderDate") Date orderDate) {
-        ShoppingCartSession shoppingCartSession = applicationContext.getBean(ShoppingCartSession.class);
-        if (shoppingCartSession.getShoppingCartSize() == 0) {
+        ShoppingCart shoppingCart = applicationContext.getBean(ShoppingCart.class);
+        if (shoppingCart.getShoppingCartSize() == 0) {
             return false;
         }
-//        System.out.println(orderDate);
-//        List<ShoppingCart> cartContent=orderService.getShoppingCart(userId);
-        orderService.addOrder(orderDate, shoppingCartSession);
-        shoppingCartSession.clear();
+        orderService.addOrder(orderDate, shoppingCart);
+        shoppingCart.clear();
         return true;
     }
 
     @RequestMapping("/addCartItem")
     public boolean addCartItem(@RequestParam("userId")int userId,@RequestParam("bookId")int bookId){
-        ShoppingCartSession shoppingCartSession=applicationContext.getBean(ShoppingCartSession.class);
-        shoppingCartSession.setUserId(userId);
-        shoppingCartSession.addCartItem(bookId);
+        ShoppingCart shoppingCart =applicationContext.getBean(ShoppingCart.class);
+        shoppingCart.setUserId(userId);
+        shoppingCart.addCartItem(bookId);
         return true;
     }
 
-//    @RequestMapping("/getShoppingCart")
-//    public List<BookInfoInCart> getShoppingCart(@RequestParam("userId")int userId){
-//        return orderService.shoppingCart(userId);
-//    }
-
-    @RequestMapping("/getShoppingCartWithSession")
-    public ShoppingCartSession getShoppingCartWithSession(){
-        return applicationContext.getBean(ShoppingCartSession.class);
+    @RequestMapping("/getShoppingCart")
+    public ShoppingCart getShoppingCart(){
+        return applicationContext.getBean(ShoppingCart.class);
 
     }
 

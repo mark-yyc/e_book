@@ -2,9 +2,8 @@ package com.mark.serviceImpl;
 
 import com.mark.dao.BookDao;
 import com.mark.dao.OrderDao;
-import com.mark.dao.ShoppingCartDao;
-import com.mark.dto.CartItem;
-import com.mark.dto.ShoppingCartSession;
+import com.mark.dto.ShoppingCartItem;
+import com.mark.dto.ShoppingCart;
 import com.mark.service.OrderService;
 import com.mark.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,55 +19,15 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao;
 
     @Autowired
-    private ShoppingCartDao shoppingCartDao;
-
-    @Autowired
     private BookDao bookDao;
 
-//    @Override
-//    public void addOrder(int userId , Date orderDate,List<ShoppingCart>bookList){
-//        orderDao.addOrder(userId,orderDate,bookList);
-//        shoppingCartDao.clearShoppingCart(userId);
-//        for (ShoppingCart shoppingCart : bookList) {
-//            bookDao.decreaseInventory(shoppingCart.getBookId(), shoppingCart.getAmount());
-//        }
-//    }
-
-
     @Override
-    public void addOrder(Date orderDate, ShoppingCartSession shoppingCartSession) {
-        orderDao.addOrder(orderDate, shoppingCartSession);
-        List<CartItem> cartItemList = shoppingCartSession.getShoppingCartList();
-        for (CartItem cartItem : cartItemList) {
-            bookDao.decreaseInventory(cartItem.getBookId(), cartItem.getAmount());
+    public void addOrder(Date orderDate, ShoppingCart shoppingCart) {
+        orderDao.addOrder(orderDate, shoppingCart);
+        List<ShoppingCartItem> shoppingCartItemList = shoppingCart.getShoppingCartList();
+        for (ShoppingCartItem shoppingCartItem : shoppingCartItemList) {
+            bookDao.decreaseInventory(shoppingCartItem.getBookId(), shoppingCartItem.getAmount());
         }
-    }
-
-    @Override
-    public void addCartItem(int userId,int bookId){
-        shoppingCartDao.addCartItem(userId, bookId);
-    }
-
-    @Override
-    public List<ShoppingCart> getShoppingCart(int userId){
-        return shoppingCartDao.getShoppingCart(userId);
-    }
-
-    @Override
-    public List<BookInfoInCart> shoppingCart(int userId){
-        List<BookInfoInCart>result=new ArrayList<>();
-        List<ShoppingCart> tmp=shoppingCartDao.getShoppingCart(userId);
-        for (ShoppingCart shoppingCart : tmp) {
-            int bookId = shoppingCart.getBookId();
-            int amount = shoppingCart.getAmount();
-            Book oneBook = bookDao.findOne(bookId);
-            String name = oneBook.getName();
-            String image=oneBook.getImage();
-            double price = oneBook.getPrice();
-            BookInfoInCart one = new BookInfoInCart(bookId,name, price, amount,image);
-            result.add(one);
-        }
-        return result;
     }
 
     @Override

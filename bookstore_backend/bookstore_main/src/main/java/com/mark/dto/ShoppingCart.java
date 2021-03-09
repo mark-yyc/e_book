@@ -11,24 +11,24 @@ import java.util.List;
 @Component
 @Scope("session")
 @Data
-public class ShoppingCartSession implements Serializable {
+public class ShoppingCart implements Serializable {
     private int userId;
-    private List<CartItem> shoppingCartList;
+    private List<ShoppingCartItem> shoppingCartList;
 
     public void addCartItem(int bookId){
         if(shoppingCartList==null){
             shoppingCartList=new ArrayList<>();
         }
-        for(CartItem cartItem : shoppingCartList){
-            if (cartItem.getBookId() == bookId) {
-                cartItem.setAmount(cartItem.getAmount() + 1);
+        for(ShoppingCartItem shoppingCartItem : shoppingCartList){
+            if (shoppingCartItem.getBookId() == bookId) {
+                shoppingCartItem.setAmount(shoppingCartItem.getAmount() + 1);
                 return;
             }
         }
-        CartItem cartItem = new CartItem();
-        cartItem.setBookId(bookId);
-        cartItem.setAmount(1);
-        shoppingCartList.add(cartItem);
+        ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+        shoppingCartItem.setBookId(bookId);
+        shoppingCartItem.setAmount(1);
+        shoppingCartList.add(shoppingCartItem);
     }
 
     public int getShoppingCartSize() {
