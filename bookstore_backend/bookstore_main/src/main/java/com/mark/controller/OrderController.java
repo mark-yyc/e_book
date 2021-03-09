@@ -1,10 +1,13 @@
 package com.mark.controller;
 
+import com.mark.BookstoreApplication;
 import com.mark.dto.ShoppingCart;
+import com.mark.dto.ShoppingCartItem;
 import com.mark.entity.BookInfoInCart;
 import com.mark.entity.Order;
 import com.mark.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,13 +24,17 @@ public class OrderController {
     @Autowired
     WebApplicationContext applicationContext;
 
+    @Autowired
+    private KafkaTemplate<String,Object> kafkaTemplate;
+
     @RequestMapping("/addOrder")
     public boolean addOrder(@RequestParam("orderDate") Date orderDate) {
         ShoppingCart shoppingCart = applicationContext.getBean(ShoppingCart.class);
-        if (shoppingCart.getShoppingCartSize() == 0) {
+        shoppingCart.setOrderDate(orderDate);
+        if (shoppingCart.getShoppingCartList()==null||shoppingCart.getShoppingCartList().size() == 0) {
             return false;
         }
-        orderService.addOrder(orderDate, shoppingCart);
+        kafkaTemplate.send("addOrder", BookstoreApplication.gson.toJson(shoppingCart));
         shoppingCart.clear();
         return true;
     }

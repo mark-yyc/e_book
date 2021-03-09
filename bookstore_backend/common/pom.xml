@@ -12,8 +12,8 @@
     <artifactId>common</artifactId>
 
     <properties>
-        <maven.compiler.source>15</maven.compiler.source>
-        <maven.compiler.target>15</maven.compiler.target>
+        <java.version>1.8</java.version>
     </properties>
+
 
 </project>

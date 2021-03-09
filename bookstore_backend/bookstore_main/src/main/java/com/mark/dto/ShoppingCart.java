@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 @Component
@@ -13,6 +14,7 @@ import java.util.List;
 @Data
 public class ShoppingCart implements Serializable {
     private int userId;
+    private Date orderDate;
     private List<ShoppingCartItem> shoppingCartList;
 
     public void addCartItem(int bookId){
@@ -29,14 +31,6 @@ public class ShoppingCart implements Serializable {
         shoppingCartItem.setBookId(bookId);
         shoppingCartItem.setAmount(1);
         shoppingCartList.add(shoppingCartItem);
-    }
-
-    public int getShoppingCartSize() {
-        if (shoppingCartList != null) {
-            return shoppingCartList.size();
-        } else {
-            return 0;
-        }
     }
 
     public void clear() {

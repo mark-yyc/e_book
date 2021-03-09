@@ -8,10 +8,5 @@ import java.sql.Date;
 import java.util.List;
 
 public interface OrderDao {
-
-    List<Order> getUserOrder(int userId);
-
-    List<Order> getOrders();
-
-    List<OrderItem> getOrderItems(int orderId);
+    void addOrder(Date orderDate, ShoppingCart shoppingCart);
 }

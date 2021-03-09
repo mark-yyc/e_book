@@ -15,7 +15,7 @@ import java.rmi.RemoteException;
 public class BookController {
     @RequestMapping("/getBookDetailByName")
     public BookDetail getBookDetailByName(@RequestParam("name") String bookname) throws RemoteException, NotBoundException, MalformedURLException {
-        BookDetailService bookDetailService=(BookDetailService) Naming.lookup("rmi://127.0.0.1:1099/bookDetailService");
+        BookDetailService bookDetailService=(BookDetailService) Naming.lookup("rmi://127.0.0.1:1009/bookDetailService");
         return bookDetailService.getBookDetail(bookname);
     }
 }

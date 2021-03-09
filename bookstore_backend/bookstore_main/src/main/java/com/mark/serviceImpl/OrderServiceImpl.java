@@ -22,15 +22,6 @@ public class OrderServiceImpl implements OrderService {
     private BookDao bookDao;
 
     @Override
-    public void addOrder(Date orderDate, ShoppingCart shoppingCart) {
-        orderDao.addOrder(orderDate, shoppingCart);
-        List<ShoppingCartItem> shoppingCartItemList = shoppingCart.getShoppingCartList();
-        for (ShoppingCartItem shoppingCartItem : shoppingCartItemList) {
-            bookDao.decreaseInventory(shoppingCartItem.getBookId(), shoppingCartItem.getAmount());
-        }
-    }
-
-    @Override
     public List<Order> getUserOrder(int userId){
         return orderDao.getUserOrder(userId);
     }

@@ -8,8 +8,6 @@ import java.sql.Date;
 import java.util.List;
 
 public interface OrderService {
-    void addOrder(Date orderDate, ShoppingCart shoppingCart);
-
     List<Order> getUserOrder(int userId);
 
     List<Order> getOrders();
