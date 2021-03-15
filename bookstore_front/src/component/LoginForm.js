@@ -49,6 +49,7 @@ export class LoginForm extends React.Component {
                 localStorage.clear();
                 console.log(this.state.user.userId);
                 localStorage.setItem("userId", this.state.user.userId);
+                localStorage.setItem("username",this.state.user.username);
                 if (this.state.user.userType == 0) {
                     return <Redirect to={{pathname: "/home"}}/>;
                 } else {

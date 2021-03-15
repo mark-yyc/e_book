@@ -2,6 +2,7 @@ import React from 'react';
 import {Layout, Menu} from 'antd';
 import {CopyOutlined, ReadOutlined, ShoppingCartOutlined, UserOutlined,} from '@ant-design/icons';
 import {Link} from 'react-router-dom'
+import {UserList} from "./UserList";
 
 const {Sider} = Layout;
 
@@ -41,6 +42,15 @@ class SideBar extends React.Component {
                         <CopyOutlined/>
                         <Link to={{pathname: "/orders"}}>
                             <span className="nav-text">My Orders</span>
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <UserOutlined/>
+                        <Link to={{
+                            pathname: "/chatRoom",
+                            search: '?username=' + localStorage.getItem("username")
+                        }}>
+                            <span className="nav-text">ChatRoom</span>
                         </Link>
                     </Menu.Item>
                 </Menu>

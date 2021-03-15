@@ -1,5 +1,6 @@
 package com.mark.controller;
 
+import com.google.gson.JsonObject;
 import com.mark.BookstoreApplication;
 import com.mark.dto.ShoppingCart;
 import com.mark.dto.ShoppingCartItem;
@@ -8,6 +9,7 @@ import com.mark.entity.Order;
 import com.mark.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,7 @@ import java.sql.Date;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class OrderController {
     @Autowired
     OrderService orderService;
@@ -66,5 +69,10 @@ public class OrderController {
     @RequestMapping("/getOrderItem")
     public List<BookInfoInCart> getOrderItem(@RequestParam("orderId") int orderId){
         return orderService.getOrderItems(orderId);
+    }
+
+    @RequestMapping("/fwwbTest")
+    public String fwwbTest(@RequestParam("itemId")String itemId){
+        return "success";
     }
 }
