@@ -1,5 +1,6 @@
 package com.mark.controller;
 
+import com.mark.BookstoreApplication;
 import com.mark.entity.User;
 import com.mark.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,17 @@ public class UserController {
 
     @RequestMapping("/checkUser")
     public User checkUser(@RequestParam("username") String username, @RequestParam("password") String password){
-        return userService.checkUser(username, password);
+        User user=userService.checkUser(username, password);
+        if(user!=null){
+            BookstoreApplication.atomicAmount.increment();
+        }
+        return user;
     }
 
+    @RequestMapping("/getViewAmount")
+    public int getViewAmount(){
+        return BookstoreApplication.atomicAmount.getValue();
+    }
 
     @RequestMapping("/getUsers")
     public List<User> getUsers() {
