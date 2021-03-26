@@ -14,12 +14,14 @@ public class WriteInTask {
     @Autowired
     private ViewRepository viewRepository;
 
-    @Scheduled(fixedDelay = 60*1000)
+    @Scheduled(fixedDelay = 10*1000)
     void writeIn(){
         List<View> views=viewRepository.findAll();
-        View view=new View();
-        if(views!=null&&views.size()!=0){
+        View view=null;
+        if(views.size() != 0){
             view=views.get(0);
+        }else{
+            view=new View();
         }
         view.setViewAmount(BookstoreApplication.atomicAmount.getValue());
         viewRepository.save(view);
