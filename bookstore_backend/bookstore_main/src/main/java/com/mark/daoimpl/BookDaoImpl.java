@@ -8,7 +8,9 @@ import com.mark.repository.BookImageRepository;
 import com.mark.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,12 +33,10 @@ public class BookDaoImpl implements BookDao {
         Book book=bookRepository.getOne(id);
         Optional<BookImage> image=bookImageRepository.findById(id);
         if (image.isPresent()){
-            //System.out.println("Not Null " + id);
             book.setImage(image.get());
         }
         else{
             book.setImage(null);
-            //System.out.println("It's Null");
         }
         return book;
     }

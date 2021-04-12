@@ -4,8 +4,10 @@ import com.google.gson.JsonObject;
 import com.mark.BookstoreApplication;
 import com.mark.dto.ShoppingCart;
 import com.mark.dto.ShoppingCartItem;
+import com.mark.entity.Book;
 import com.mark.entity.BookInfoInCart;
 import com.mark.entity.Order;
+import com.mark.service.BookService;
 import com.mark.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -16,16 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
 public class OrderController {
     @Autowired
     OrderService orderService;
 
     @Autowired
     WebApplicationContext applicationContext;
+
+    @Autowired
+    BookService bookService;
 
     @Autowired
     private KafkaTemplate<String,Object> kafkaTemplate;
@@ -51,9 +56,17 @@ public class OrderController {
     }
 
     @RequestMapping("/getShoppingCart")
-    public ShoppingCart getShoppingCart(){
-        return applicationContext.getBean(ShoppingCart.class);
-
+    public List<BookInfoInCart> getShoppingCart(){
+        List<ShoppingCartItem> shoppingCartItemList=applicationContext.getBean(ShoppingCart.class).getShoppingCartList();
+        if (shoppingCartItemList==null||shoppingCartItemList.size()==0){
+            return null;
+        }
+        List<BookInfoInCart>bookInfoInCartList=new ArrayList<>();
+        for (ShoppingCartItem shoppingCartItem:shoppingCartItemList){
+            Book tmp=bookService.findBookById(shoppingCartItem.getBookId());
+            bookInfoInCartList.add(new BookInfoInCart(tmp,shoppingCartItem.getAmount()));
+        }
+        return bookInfoInCartList;
     }
 
     @RequestMapping("/getUserOrder")

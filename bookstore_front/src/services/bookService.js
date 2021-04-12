@@ -21,7 +21,7 @@ export const modifyBookstate = (id, state) => {
     let opts = {
         method: "POST",
         body: formData,
-        credentials: "include"
+        // credentials: "include"
     };
     fetch(url, opts)
         .then((response) => {
@@ -49,7 +49,7 @@ export const modifyBook = (id, name, isbn, type, author, price, description, inv
     let opts = {
         method: "POST",
         body: formData,
-        credentials: "include"
+        // credentials: "include"
     };
     fetch(url, opts)
         .then((response) => {
@@ -79,7 +79,7 @@ export const addBook = (name, isbn, type, author, price, description, inventory,
     let opts = {
         method: "POST",
         body: formData,
-        credentials: "include"
+        // credentials: "include"
     };
     fetch(url, opts)
         .then((response) => {

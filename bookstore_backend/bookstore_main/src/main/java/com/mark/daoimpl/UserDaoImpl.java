@@ -5,7 +5,12 @@ import com.mark.entity.User;
 import com.mark.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import javax.transaction.TransactionManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository

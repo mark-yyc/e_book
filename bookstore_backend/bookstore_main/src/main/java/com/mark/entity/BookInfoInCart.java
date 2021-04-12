@@ -15,6 +15,14 @@ public class BookInfoInCart {
         this.image=image;
     }
 
+    public BookInfoInCart(Book book,int amount){
+        this.bookId=book.getBookId();
+        this.name=book.getName();
+        this.price=book.getPrice();
+        this.image=book.getImage();
+        this.amount=amount;
+    }
+
     public int getBookId(){
         return bookId;
     }
