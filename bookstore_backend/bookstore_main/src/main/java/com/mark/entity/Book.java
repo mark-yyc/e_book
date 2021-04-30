@@ -117,6 +117,9 @@ public class Book {
     }
 
     public void setImage(BookImage image) {
+        if(image==null){
+            this.image=null;
+        }else
         this.image = image.getIconBase64();
     }
 }

@@ -39,5 +39,10 @@ public class BookController {
         bookService.addBook(isbn,name,type,author,price,description,inventory,image);
         return true;
     }
+
+    @RequestMapping("/findByRelatedLabel")
+    public List<Book> findByRelatedLabel(@RequestParam("label")String labelName){
+        return bookService.findByRelatedLabel(labelName);
+    }
 }
 

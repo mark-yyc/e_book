@@ -22,22 +22,10 @@ public class BookDaoImpl implements BookDao {
     @Autowired
     private BookImageRepository bookImageRepository;
 
-//    @Override
-//    public Book findOne(Integer id) {
-//        return bookRepository.getOne(id);
-//    }
-
-
     @Override
     public Book findOne(Integer id) {
         Book book=bookRepository.getOne(id);
-        Optional<BookImage> image=bookImageRepository.findById(id);
-        if (image.isPresent()){
-            book.setImage(image.get());
-        }
-        else{
-            book.setImage(null);
-        }
+        book.setImage(bookImageRepository.findFirstByBookId(id));
         return book;
     }
 
@@ -45,14 +33,17 @@ public class BookDaoImpl implements BookDao {
     public List<Book> getBooks() {
         List<Book> bookList= bookRepository.getBooks();
         for (Book book:bookList){
-            Optional<BookImage> image=bookImageRepository.findById(book.getBookId());
-            if (image.isPresent()){
-                book.setImage(image.get());
-            }
-            else{
-                book.setImage(null);
-            }
+            book.setImage(bookImageRepository.findFirstByBookId(book.getBookId()));
         }
+        return bookList;
+    }
+
+    @Override
+    public List<Book> findByBookIdList(List<Integer> bookIdList) {
+        List<Book> bookList= bookRepository.findByBookIdList(bookIdList);
+//        for (Book book:bookList){
+//            book.setImage(bookImageRepository.findFirstByBookId(book.getBookId()));
+//        }
         return bookList;
     }
 
@@ -68,13 +59,7 @@ public class BookDaoImpl implements BookDao {
         bookDetail.setIsbn(book.getIsbn());
         bookDetail.setPrice(book.getPrice());
         bookDetail.setType(book.getType());
-        Optional<BookImage> image=bookImageRepository.findById(book.getBookId());
-        if(image.isPresent()){
-            bookDetail.setImage(image.get().getIconBase64());
-        }
-        else {
-            bookDetail.setImage(null);
-        }
+        book.setImage(bookImageRepository.findFirstByBookId(book.getBookId()));
         return bookDetail;
     }
 

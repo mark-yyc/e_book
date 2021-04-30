@@ -9,8 +9,6 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import javax.transaction.TransactionManager;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository

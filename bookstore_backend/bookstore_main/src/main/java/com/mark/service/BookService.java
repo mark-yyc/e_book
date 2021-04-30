@@ -16,4 +16,5 @@ public interface BookService {
     Book modifyBook(Integer bookId, String name, String isbn,String type, String author, double price, String description, Integer inventory,String image);
 
 //    List<BookInfoInCart> getUserBook(int userId);
+    List<Book> findByRelatedLabel(String labelName);
 }

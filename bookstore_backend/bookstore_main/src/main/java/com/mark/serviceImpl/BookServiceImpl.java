@@ -1,12 +1,16 @@
 package com.mark.serviceImpl;
 
 import com.mark.dao.BookDao;
+import com.mark.dao.LabelDao;
+import com.mark.dao.LabelNodeDao;
 import com.mark.dao.OrderDao;
 import com.mark.entity.Book;
+import com.mark.entity.LabelNode;
 import com.mark.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,7 +19,10 @@ public class BookServiceImpl implements BookService {
     private BookDao bookDao;
 
     @Autowired
-    private OrderDao orderDao;
+    private LabelNodeDao labelNodeDao;
+
+    @Autowired
+    private LabelDao labelDao;
 
     @Override
     public Book findBookById(Integer id){
@@ -30,6 +37,20 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book modifyBook(Integer bookId, String name, String isbn,String type, String author, double price, String description, Integer inventory,String image){
         return bookDao.modifyBook(bookId,name,isbn,type,author,price,description,inventory,image);
+    }
+
+    @Override
+    public List<Book> findByRelatedLabel(String labelName) {
+        List<LabelNode> results=labelNodeDao.findRelated(labelName);
+        if(results!=null){
+            List<String> labelNameList=new ArrayList<>();
+            for (LabelNode result:results){
+                labelNameList.add(result.getLabelName());
+            }
+            return bookDao.findByBookIdList(labelDao.findBookIdByLabelNameList(labelNameList));
+        }else{
+            return null;
+        }
     }
 
     @Override

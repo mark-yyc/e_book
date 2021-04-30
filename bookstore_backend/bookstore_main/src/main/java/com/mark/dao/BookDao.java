@@ -10,6 +10,8 @@ public interface BookDao {
 
     List<Book> getBooks();
 
+    List<Book> findByBookIdList(List<Integer> bookIdList);
+
     BookDetail findFirstByName(String namr);
 
     void decreaseInventory(int bookId,int amount);

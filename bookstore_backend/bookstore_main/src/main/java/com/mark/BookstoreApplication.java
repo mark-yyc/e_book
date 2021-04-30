@@ -7,6 +7,7 @@ import com.mark.serviceImpl.BookDetailServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
@@ -19,6 +20,7 @@ import java.rmi.registry.LocateRegistry;
 @SpringBootApplication
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds= 1800)
 @EnableScheduling
+@EnableNeo4jRepositories
 public class BookstoreApplication {
     public static Gson gson=new Gson();
     public static AtomicAmount atomicAmount=new AtomicAmount();

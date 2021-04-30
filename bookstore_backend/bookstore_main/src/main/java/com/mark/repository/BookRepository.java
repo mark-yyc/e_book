@@ -18,6 +18,9 @@ public interface BookRepository extends JpaRepository<Book,Integer> {
 
     Book findFirstByName(String name);
 
+    @Query(value="from Book where bookId in :bookIdList")
+    List<Book> findByBookIdList(@Param("bookIdList") List<Integer> bookIdList);
+
     @Transactional
     @Modifying
     @Query(value="update Book set inventory=inventory-:amount where bookId = :bookId")
