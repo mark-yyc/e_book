@@ -24,7 +24,8 @@ public class BookController {
 
     @RequestMapping("/modifyBook")
     public Book modifyBook(@RequestParam("id") Integer id,@RequestParam("name")String name,@RequestParam("isbn")String isbn,@RequestParam("type")String type,
-                    @RequestParam("author")String author,@RequestParam("price")double price,@RequestParam("description")String description,@RequestParam("inventory")Integer inventory,@RequestParam("image")String image){
+                    @RequestParam("author")String author,@RequestParam("price")double price,@RequestParam(name="description",required=false)String description,
+                           @RequestParam("inventory")Integer inventory,@RequestParam(name="image",required=false)String image){
         return bookService.modifyBook(id,name,isbn,type,author,price,description,inventory,image);
     }
 

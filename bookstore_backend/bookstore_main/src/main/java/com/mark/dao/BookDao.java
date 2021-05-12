@@ -12,7 +12,7 @@ public interface BookDao {
 
     List<Book> findByBookIdList(List<Integer> bookIdList);
 
-    BookDetail findFirstByName(String namr);
+    BookDetail findFirstByName(String name);
 
     void decreaseInventory(int bookId,int amount);
 
