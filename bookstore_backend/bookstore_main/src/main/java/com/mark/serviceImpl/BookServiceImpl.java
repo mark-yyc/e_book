@@ -7,9 +7,23 @@ import com.mark.dao.OrderDao;
 import com.mark.entity.Book;
 import com.mark.entity.LabelNode;
 import com.mark.service.BookService;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.wltea.analyzer.lucene.IKAnalyzer;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +68,25 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> searchWithTextIndex(String search) throws IOException, ParseException {
+        Directory directory= FSDirectory.open(new File("bookstore_main/src/main/resources/book_index"));
+        IndexReader reader= DirectoryReader.open(directory);
+        IndexSearcher indexSearcher=new IndexSearcher(reader);
+        QueryParser queryParser=new QueryParser("description",new IKAnalyzer());
+        Query query=queryParser.parse(search);
+        TopDocs topDocs=indexSearcher.search(query,10);
+        System.out.println("本次搜索共找到" + topDocs.totalHits + "条数据");
+        ScoreDoc[] scoreDocs = topDocs.scoreDocs;
+        List<Book> bookList=new ArrayList<>();
+        for (ScoreDoc scoreDoc : scoreDocs) {
+            Document doc = reader.document(scoreDoc.doc);
+            System.out.println(doc.get("description"));
+            bookList.add(bookDao.findOne(Integer.parseInt(doc.get("id"))));
+        }
+        return bookList;
+    }
+
+    @Override
     public void modifyBookState(Integer bookId,Integer state){
         bookDao.modifyBookState(bookId,state);
     }
@@ -63,12 +96,4 @@ public class BookServiceImpl implements BookService {
         bookDao.addBook(isbn, name, type, author, price, description, inventory, image);
     }
 
-//    @Override
-//    public List<BookInfoInCart> getUserBook(int userId){
-//        List<Order> orders=orderDao.getUserOrder(userId);
-//        List<BookInfoInCart> bookInfo=new ArrayList<>();
-//        for (Order order:orders){
-//            List<BookInfoInCart> tmp=orderDao.getOrderItems(order.getOrderId());
-//        }
-//    }
 }

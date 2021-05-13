@@ -1,7 +1,9 @@
 package com.mark.service;
 
 import com.mark.entity.Book;
+import org.apache.lucene.queryparser.classic.ParseException;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface BookService {
@@ -17,4 +19,6 @@ public interface BookService {
 
 //    List<BookInfoInCart> getUserBook(int userId);
     List<Book> findByRelatedLabel(String labelName);
+
+    List<Book> searchWithTextIndex(String search) throws IOException, ParseException;
 }

@@ -2,9 +2,11 @@ package com.mark.controller;
 
 import com.mark.entity.Book;
 import com.mark.service.BookService;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -44,6 +46,11 @@ public class BookController {
     @RequestMapping("/findByRelatedLabel")
     public List<Book> findByRelatedLabel(@RequestParam("label")String labelName){
         return bookService.findByRelatedLabel(labelName);
+    }
+
+    @RequestMapping(value = "/book",method = RequestMethod.GET)
+    public List<Book> searchWithTextIndex(@RequestParam("search")String search) throws IOException, ParseException {
+        return bookService.searchWithTextIndex(search);
     }
 }
 

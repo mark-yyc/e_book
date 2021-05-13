@@ -34,7 +34,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public Book findOne(Integer id) {
         Book book = bookRepository.getOne(id);
-        book.setImage(bookImageRepository.findFirstByBookId(id));
+//        book.setImage(bookImageRepository.findFirstByBookId(id));
         return book;
     }
 
