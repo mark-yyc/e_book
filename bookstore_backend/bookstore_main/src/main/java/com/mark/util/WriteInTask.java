@@ -26,5 +26,4 @@ public class WriteInTask {
         view.setViewAmount(BookstoreApplication.atomicAmount.getValue());
         viewRepository.save(view);
     }
-
 }

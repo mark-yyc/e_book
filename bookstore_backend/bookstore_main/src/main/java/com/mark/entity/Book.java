@@ -3,6 +3,7 @@ package com.mark.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @Table(name = "book")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "bookId")
+@Data
 public class Book {
     private int bookId;
     private String isbn;
@@ -45,7 +47,7 @@ public class Book {
     public Integer getBookId() {
         return bookId;
     }
-    private void setBookId(Integer id) {
+    public void setBookId(Integer id) {
         this.bookId = id;
     }
 
@@ -53,7 +55,7 @@ public class Book {
     public String getIsbn() {
         return isbn;
     }
-    private void setIsbn(String isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -61,7 +63,7 @@ public class Book {
     public String getName() {
         return name;
     }
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -69,7 +71,7 @@ public class Book {
     public String getType() {
         return type;
     }
-    private void setType(String type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -77,7 +79,7 @@ public class Book {
     public String getAuthor() {
         return author;
     }
-    private void setAuthor(String author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
@@ -85,7 +87,7 @@ public class Book {
     public String getDescription() {
         return description;
     }
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -94,7 +96,7 @@ public class Book {
     public Double getPrice() {
         return price;
     }
-    private void setPrice(Double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -102,7 +104,7 @@ public class Book {
     public Integer getInventory() {
         return inventory;
     }
-    private void setInventory(Integer inventory) {
+    public void setInventory(Integer inventory) {
         this.inventory = inventory;
     }
 

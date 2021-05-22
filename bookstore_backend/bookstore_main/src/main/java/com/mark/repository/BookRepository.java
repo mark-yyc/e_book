@@ -16,6 +16,8 @@ public interface BookRepository extends JpaRepository<Book,Integer> {
     @Query(value = "from Book where state = 1")
     List<Book> getBooks();
 
+    List<Book> findAllBy();
+
     Book findFirstByName(String name);
 
     @Query(value="from Book where bookId in :bookIdList")
