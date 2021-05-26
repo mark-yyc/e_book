@@ -21,9 +21,6 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         server-id: github
-    
-    - name: test secret
-      run: echo "${{ secrets.SSH_PRIVATE_KEY}}"
         
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
@@ -31,4 +28,5 @@ jobs:
         host: 47.100.88.133
         username: root
         key: ${{ secrets.SSH_PRIVATE_KEY}}
-        script: whoami
+        script: |
+          ls
