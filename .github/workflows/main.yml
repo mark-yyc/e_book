@@ -23,7 +23,7 @@ jobs:
         server-id: github
     
     - name: test secret
-      run: echo ${{ secrets.SSH_PRIVATE_KEY}}
+      run: echo "${{ secrets.SSH_PRIVATE_KEY}}"
         
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
