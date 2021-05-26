@@ -25,8 +25,9 @@ jobs:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
       with:
-        host: 47.100.88.133
+        host: 202.120.40.8
         username: root
+        port: 30550
         key: ${{ secrets.SSH_PRIVATE_KEY}}
         script: |
           ls
