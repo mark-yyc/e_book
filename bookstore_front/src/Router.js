@@ -14,6 +14,7 @@ import UsersView from "./view/UsersView";
 import BookDetailAdminView from "./view/BookDetailAdminView";
 import {AddBookView} from "./view/AddBookView";
 import OrdersAdminView from "./view/OrdersAdminView";
+import ChatRoomView from "./view/ChatRoomView";
 
 
 class BasicRoute extends React.Component {
@@ -28,7 +29,6 @@ class BasicRoute extends React.Component {
                     <Route path="/bookDetailAdmin" component={BookDetailAdminView}/>
                     <Route path="/addBookPage" component={AddBookView}/>
                     <Route path="/ordersAdmin" component={OrdersAdminView}/>
-
                     <Route path="/orderPage" component={OrderPageView}/>
                     <Route path="/orders" component={OrdersView}/>
                     <Route path="/register" component={RegisterView}/>
@@ -36,7 +36,9 @@ class BasicRoute extends React.Component {
                     <Route path="/bookDetails" component={BookDetailView}/>
                     <Route path="/cart" component={CartView}/>
                     <Route path="/orderDetail" component={OrderDetailView}/>
+                    <Route path="/chatRoom" component={ChatRoomView}/>
                     <Route path="/" component={LoginView}/>
+
                 </Switch>
 
             </Router>

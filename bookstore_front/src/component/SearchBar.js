@@ -6,7 +6,7 @@ const {Content} = Layout;
 class SearchBar extends React.Component {
     constructor(props) {
         super(props);
-        this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+        // this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
     }
 
     handleFilterTextChange(e) {

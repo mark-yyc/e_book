@@ -17,7 +17,7 @@ export const findUser = (username, callback1, callback2) => {
     let opts = {
         method: "POST",
         body: formData,
-        credentials: "include"
+        // credentials: "include"
     };
     fetch(url, opts)
         .then((response) => {
@@ -41,7 +41,7 @@ export const addUser = (username, password, address, callback) => {
     let opts = {
         method: "POST",
         body: formData,
-        credentials: "include"
+        // credentials: "include"
     };
     fetch(url, opts)
         .then((response) => {
@@ -63,7 +63,7 @@ export const modifyState = (userId, state, callback) => {
     let opts = {
         method: "POST",
         body: formData,
-        credentials: "include"
+        // credentials: "include"
     };
 
     fetch(url, opts)

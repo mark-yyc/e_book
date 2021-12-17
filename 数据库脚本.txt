@@ -27,21 +27,12 @@ CREATE TABLE `book` (
   PRIMARY KEY (`id`)
 )
 
-DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `order`;
 CREATE TABLE `orders` (
 	`order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
 	`order_date` date NOT NULL,
   PRIMARY KEY (`order_id`)
-) 
-
-DROP TABLE IF EXISTS `shopping_cart`;
-CREATE TABLE `shopping_cart` (
-	`cart_item_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-	`id` int(11) NOT NULL,
-  `amount` int(11) NOT NULL,
-  PRIMARY KEY (`cart_item_id`)
 ) 
 
 DROP TABLE IF EXISTS `order_item`;
@@ -52,6 +43,15 @@ CREATE TABLE `order_item` (
   `amount` int(11) NOT NULL,
   PRIMARY KEY (`order_item_id`)
 ) 
+
+DROP TABLE IF EXISTS `label`;
+CREATE TABLE `label` (
+  `label_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `label_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`label_id`)
+)
+  
 
 
 INSERT INTO `book` VALUES ('1',1, '1', 'Java核心技术卷II', '编程', '凯S.霍斯特曼', '95.20', '本书是Java领域有影响力和价值的著作之一，由拥有20多年教学与研究经验的Java技术专家撰写（获Jolt大奖），与《Java编程思想》齐名，10余年全球畅销不衰，广受好评。第10版根据JavaSE8全面更新，同时修正了第9版中的不足，系统全面讲解了Java语言的核心概念、语法、重要特性和开发方法，包含大量案例，实践性强。', '1000', 'http://img3m9.ddimg.cn/12/36/1546133799-1_w_1.jpg');
@@ -85,3 +85,82 @@ INSERT INTO `book` VALUES ('28', 1,'28', '哈利波特与魔法石', '魔幻小�
 INSERT INTO `book` VALUES ('29', 1,'29', '哈利·波特与死亡圣器', '魔幻小说', 'J·K·罗琳', '56.20', '两个人不能都活着，只有一个生存下来，我们中的一个将要永远离开……', '1551', 'http://img3m4.ddimg.cn/71/20/25479404-1_w_1.jpg');
 
 INSERT INTO `user` VALUES(1,'mark2333','123456',1,'mark','mark',NULL,'1342757333@qq.com',1);
+
+INSERT INTO `label` VALUES(1,1,'编程');
+INSERT INTO `label` VALUES(2,1,'参考');
+INSERT INTO `label` VALUES(3,2,'编程');
+INSERT INTO `label` VALUES(4,2,'教材');
+INSERT INTO `label` VALUES(5,3,'编程');
+INSERT INTO `label` VALUES(6,3,'参考');
+INSERT INTO `label` VALUES(7,4,'文学');
+INSERT INTO `label` VALUES(8,5,'编程');
+INSERT INTO `label` VALUES(9,5,'参考');
+INSERT INTO `label` VALUES(10,6,'魔幻');
+INSERT INTO `label` VALUES(11,6,'小说');
+INSERT INTO `label` VALUES(12,7,'科幻');
+INSERT INTO `label` VALUES(13,7,'小说');
+INSERT INTO `label` VALUES(14,8,'小说');
+INSERT INTO `label` VALUES(15,8,'名著');
+INSERT INTO `label` VALUES(16,9,'小说');
+INSERT INTO `label` VALUES(17,9,'社会');
+INSERT INTO `label` VALUES(18,10,'编程');
+INSERT INTO `label` VALUES(19,10,'参考');
+INSERT INTO `label` VALUES(20,11,'小说');
+INSERT INTO `label` VALUES(21,11,'魔幻');
+INSERT INTO `label` VALUES(22,12,'名著');
+INSERT INTO `label` VALUES(23,13,'小说');
+INSERT INTO `label` VALUES(24,13,'悬疑');
+INSERT INTO `label` VALUES(25,14,'文学');
+INSERT INTO `label` VALUES(26,15,'文学');
+INSERT INTO `label` VALUES(27,16,'文学');
+INSERT INTO `label` VALUES(28,17,'教材');
+INSERT INTO `label` VALUES(29,18,'小说');
+INSERT INTO `label` VALUES(30,18,'名著');
+INSERT INTO `label` VALUES(31,19,'文学');
+INSERT INTO `label` VALUES(32,20,'名著');
+INSERT INTO `label` VALUES(33,21,'编程');
+INSERT INTO `label` VALUES(34,21,'教材');
+INSERT INTO `label` VALUES(35,22,'编程');
+INSERT INTO `label` VALUES(36,23,'编程');
+INSERT INTO `label` VALUES(37,24,'参考');
+INSERT INTO `label` VALUES(38,25,'小说');
+INSERT INTO `label` VALUES(39,26,'小说');
+INSERT INTO `label` VALUES(40,27,'小说');
+INSERT INTO `label` VALUES(41,28,'小说');
+INSERT INTO `label` VALUES(42,28,'魔幻');
+INSERT INTO `label` VALUES(43,29,'小说');
+INSERT INTO `label` VALUES(44,29,'魔幻');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
